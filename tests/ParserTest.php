@@ -4,9 +4,14 @@ use Rtablada\LiterateRoutes\Parser;
 
 class ParserTest extends PHPUnit_Framework_TestCase
 {
+	public function __construct()
+	{
+		$this->fileIn = file_get_contents(__DIR__.'/files/route-full.php.md');
+		$this->fileOut = file_get_contents(__DIR__.'/files/route-full.php.test');
+	}
+
 	public function setUp()
 	{
-		$this->file = file_get_contents(__DIR__.'/files/route-full.php.md');
 		$this->parser = new Parser;
 	}
 
@@ -39,6 +44,11 @@ class ParserTest extends PHPUnit_Framework_TestCase
 		$this->assertSame("Route::get;\n", $this->parser->compileCodeBlock($tabRoute));
 		$this->assertSame("Route::get;\n", $this->parser->compileCodeBlock($spaceRoute));
 		$this->assertSame(null, $this->parser->compileCodeBlock($noRoute));
+	}
+
+	public function testCompileString()
+	{
+		$this->assertSame($this->fileOut, $this->parser->compileString($this->fileIn));
 	}
 
 	public function tearDown()

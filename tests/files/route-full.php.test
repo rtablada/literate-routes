@@ -1,0 +1,5 @@
+// Images
+
+Route::get('images', ['uses' => 'Images@index', 'as' => 'images.index']);
+Route::get('images/new', ['uses' => 'Images@create', 'as' => 'images.create']);
+Route::post('images', ['uses' => 'Images@store', 'as' => 'images.store']);
