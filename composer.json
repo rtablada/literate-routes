@@ -8,6 +8,11 @@
             "email": "ryan.tablada@gmail.com"
         }
     ],
+    "autoload": {
+        "psr-4": {
+            "Rtablada\\LiterateRoutes\\": "src/"
+        }
+    },
     "require": {
         "illuminate/filesystem": "~4"
     }
