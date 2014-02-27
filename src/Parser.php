@@ -37,7 +37,7 @@ class Parser
 		$return = null;
 
 		foreach ($lines as $line) {
-			$matches = [];
+			$matches = array();
 
 			if (preg_match('/^[(\s\s)\t]+@(.*)(;)?/', $line, $matches)) {
 				$return .= "Route::{$matches[1]};\n";
