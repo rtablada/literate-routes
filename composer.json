@@ -1,0 +1,14 @@
+{
+    "name": "rtablada/literate-routes",
+    "description": "Allows for literate routes in php",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ryan Tablada",
+            "email": "ryan.tablada@gmail.com"
+        }
+    ],
+    "require": {
+        "illuminate/filesystem": "~4"
+    }
+}
