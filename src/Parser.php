@@ -11,6 +11,13 @@ class Parser
 		}
 	}
 
+	public function compileCodeBlock($string)
+	{
+		if (preg_match('/^[(\s\s)\t]+@/', $string)) {
+			return $this->compileRoutes($string);
+		}
+	}
+
 	public function compileRoutes($string)
 	{
 		$lines = explode("\n", $string);
