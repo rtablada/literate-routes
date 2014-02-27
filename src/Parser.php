@@ -2,6 +2,10 @@
 
 class Parser
 {
+	protected $controller;
+
+	protected $asNamespace;
+
 	public function compileString($string)
 	{
 		$parts = preg_split('/[\n\r]{2}/', $string);
@@ -12,7 +16,7 @@ class Parser
 			$return .= $this->compileCodeBlock($part);
 		}
 
-		return $return;
+		return "<?php\n\n" . $return;
 	}
 
 	public function compileComment($string)
