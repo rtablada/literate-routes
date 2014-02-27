@@ -1,11 +1,11 @@
-<?php namespace Rtablada\LiterateRoute\Console;
+<?php namespace Rtablada\LiterateRoutes\Console;
 
 use Illuminate\Console\Command;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputArgument;
-use Rtablada\LiterateRoute\FileParser;
+use Rtablada\LiterateRoutes\FileParser;
 
-class literateRoute extends Command {
+class LiterateRouteBuilderCommand extends Command {
 
 	/**
 	 * The console command name.
@@ -42,7 +42,7 @@ class literateRoute extends Command {
 	{
 		$path = $this->getPath();
 
-		$this->fileParser->build($path);
+		$this->fileParser->buildForDirectory($path);
 	}
 
 	/**
@@ -52,7 +52,7 @@ class literateRoute extends Command {
 	 */
 	protected function getPath()
 	{
-		$path = $this->input->getOption('path');
+		$path = $this->input->getArgument('path');
 
 		if (is_null($path))
 		{
@@ -72,7 +72,7 @@ class literateRoute extends Command {
 	protected function getArguments()
 	{
 		return array(
-			array('path', InputArgument::VALUE_OPTIONAL, 'The path where the command should be build literate routes.'),
+			array('path', InputArgument::OPTIONAL, 'The path where the command should be build literate routes.'),
 		);
 	}
 
