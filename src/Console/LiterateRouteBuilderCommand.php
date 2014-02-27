@@ -40,7 +40,28 @@ class literateRoute extends Command {
 	 */
 	public function fire()
 	{
-		//
+		$path = $this->getPath();
+
+		$this->fileParser->build($path);
+	}
+
+	/**
+	 * Get the path where the command should be stored.
+	 *
+	 * @return string
+	 */
+	protected function getPath()
+	{
+		$path = $this->input->getOption('path');
+
+		if (is_null($path))
+		{
+			return $this->laravel['path'];
+		}
+		else
+		{
+			return $this->laravel['path.base'].'/'.$path;
+		}
 	}
 
 	/**
@@ -51,7 +72,7 @@ class literateRoute extends Command {
 	protected function getArguments()
 	{
 		return array(
-			array('example', InputArgument::VALUE_OPTIONAL, 'An example argument.'),
+			array('path', InputArgument::VALUE_OPTIONAL, 'The path where the command should be build literate routes.'),
 		);
 	}
 
@@ -63,7 +84,6 @@ class literateRoute extends Command {
 	protected function getOptions()
 	{
 		return array(
-			array('example', null, InputOption::VALUE_OPTIONAL, 'An example option.', null),
 		);
 	}
 
