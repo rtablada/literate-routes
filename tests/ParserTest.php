@@ -16,7 +16,18 @@ class ParserTest extends PHPUnit_Framework_TestCase
     	$noComment = 'Comment';
 
     	$this->assertSame(null, $this->parser->compileComment($noComment));
-    	$this->assertSame('// Comment', $this->parser->compileComment($withComment));
+    	$this->assertSame("// Comment\n\n", $this->parser->compileComment($withComment));
+    }
+
+    public function testCompileRoutes()
+    {
+    	$tabRoute = "\t@get";
+    	$spaceRoute = "  @get";
+    	$noRoute = "@get";
+
+    	$this->assertSame("Route::get;\n", $this->parser->compileRoutes($tabRoute));
+    	$this->assertSame("Route::get;\n", $this->parser->compileRoutes($spaceRoute));
+    	$this->assertSame(null, $this->parser->compileRoutes($noRoute));
     }
 
     public function tearDown()
