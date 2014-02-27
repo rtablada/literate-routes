@@ -28,4 +28,15 @@ class FileParser
 			$this->file->put($outPath, $result);
 		}
 	}
+
+	public function buildForDirectory($directory)
+	{
+		$paths = $this->file->allFiles($directory);
+
+		foreach ($paths as $path) {
+			if (preg_match('/(.*)(?:\.php\.md)|(?:\.litphp)/', $path)) {
+				$this->build($path);
+			}
+		}
+	}
 }

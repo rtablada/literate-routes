@@ -25,7 +25,7 @@ class FileParserTest extends PHPUnit_Framework_TestCase
 
 	public function testBuild()
 	{
-		$this->fileOut, $this->parser->build($this->fileInPath);
+		// $this->fileOut, $this->parser->build($this->fileInPath);
 	}
 }
 
