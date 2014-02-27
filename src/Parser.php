@@ -33,15 +33,13 @@ class Parser
 
 	public function compileRoutes($string)
 	{
-		$lines = explode("\n", $string);
+		preg_match_all('/\n?[(\s\s)\t]+@(.*)(;)?/', $string, $matches, PREG_SET_ORDER);
 		$return = null;
 
-		foreach ($lines as $line) {
+		foreach ($matches as $match) {
 			$matches = array();
 
-			if (preg_match('/^[(\s\s)\t]+@(.*)(;)?/', $line, $matches)) {
-				$return .= "Route::{$matches[1]};\n";
-			}
+			$return .= "Route::{$match[1]};\n";
 		}
 
 		return $return;
