@@ -15,8 +15,8 @@ class Parser
 		$return = '';
 
 		foreach ($parts as $part) {
-			$return .= $this->compileVars($part);
 			$return .= $this->compileComment($part);
+			$return .= $this->compileVars($part);
 			$return .= $this->compileCodeBlock($part);
 		}
 		$return = $newFile ? "<?php\n\n" . $return : $return;
@@ -26,10 +26,10 @@ class Parser
 
 	public function compileVars($string)
 	{
-		if (preg_match('/^@setController\(\'(.*)\',\s*\'(.*)\'\)/', $string, $matches)) {
+		if (preg_match('/@setController\(\'(.*)\',\s*\'(.*)\'\)/', $string, $matches)) {
 			$this->controller = $matches[1];
 			$this->asNamespace = $matches[2];
-		} elseif (preg_match('/^@setController\(\'(.*)\'\)/', $string, $matches)) {
+		} elseif (preg_match('/@setController\(\'(.*)\'\)/', $string, $matches)) {
 			$this->controller = $matches[1];
 		}
 	}
@@ -39,9 +39,9 @@ class Parser
 		$matches = array();
 
 		if (preg_match('/#(.*)/', $string, $matches)) {
-			if (!$this->controller) {
-				$this->controller = Str::studly($matches[1]);
-			}
+			$this->controller = Str::studly($matches[1]);
+			$this->asNamespace = Str::snake(trim($matches[1]));
+
 			return "//{$matches[1]}\n\n";
 		}
 	}
@@ -50,9 +50,9 @@ class Parser
 	{
 		$return = null;
 		if (preg_match('/^[(\s\s)\t]+@/', $string)) {
-			$return .= $this->compileShortRoutes($string);
 			$return .= $this->compileRoutes($string);
 		}
+		$return .= $this->compileShortRoutes($string);
 
 		return $return;
 	}
@@ -68,7 +68,7 @@ class Parser
 			$uses = "{$this->controller}@{$match[3]}";
 			$as = "{$this->asNamespace}.{$match[3]}";
 
-			$return .= "Route::{$method}('{$uri}', array('uses' => {$uses}, 'as' => '{$as}'));\n";
+			$return .= "Route::{$method}('{$uri}', array('uses' => '{$uses}', 'as' => '{$as}'));\n";
 		}
 
 		return $return;
