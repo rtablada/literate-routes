@@ -1,3 +1,5 @@
+<?php
+
 // Images
 
 Route::get('images', ['uses' => 'Images@index', 'as' => 'images.index']);

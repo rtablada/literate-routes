@@ -20,12 +20,10 @@ class FileParserTest extends PHPUnit_Framework_TestCase
 
 	public function testCompile()
 	{
-		$this->assertSame($this->fileOut, $this->parser->compile($this->fileInPath));
-	}
+		echo "\n\n\n".$this->fileOut;
+		echo "\n\n\n".$this->parser->compile($this->fileInPath);
 
-	public function testBuild()
-	{
-		// $this->fileOut, $this->parser->build($this->fileInPath);
+		$this->assertSame($this->fileOut, $this->parser->compile($this->fileInPath));
 	}
 }
 

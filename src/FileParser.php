@@ -14,7 +14,7 @@ class FileParser
 	{
 		$string = $this->file->get($path);
 
-		return $this->parser->compileString($string);
+		return "<?php\n\n" . $this->parser->compileString($string);
 	}
 
 	public function build($path)
