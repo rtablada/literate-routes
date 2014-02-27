@@ -12,7 +12,7 @@ class Parser
 	{
 		$this->resetVars();
 		$parts = preg_split('/[\n\r]{2}/', $string);
-		$return = '';
+		$return = null;
 
 		foreach ($parts as $part) {
 			$return .= $this->compileComment($part);

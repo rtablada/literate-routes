@@ -50,3 +50,39 @@ And will output:
 ```
 // Items
 ```
+
+## Bleeding Edge Syntax
+
+This syntax isn't quite tested as strongly.
+
+### Setting Variables
+
+The parser will keep up with a set controller and namespace to use when creating shorthand routes.
+To take advantage of this, use the syntax:
+
+```
+@setController('Items', 'items')
+```
+
+### Auto Variables
+
+When you create comment block from above, we will use the comment string to set the controller and namespace automatically.
+So to recreate the `setController` from above, just use the following:
+
+```
+# Items
+```
+
+### Shorthand Routes
+
+To quickly create routes use the following syntax:
+
+```
+	get-> 'test', 'index'
+```
+
+And this will create:
+
+```
+Route::get('test', array('uses' => 'Items@index', 'as' => 'items.index'));
+```
