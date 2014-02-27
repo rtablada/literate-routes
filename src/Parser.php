@@ -13,14 +13,15 @@ class Parser
 
 	public function compileRoutes($string)
 	{
-		if (preg_match('/^[(\s\s)\t]+@/', $string)) {
-			$lines = explode("\n", $string);
+		$lines = explode("\n", $string);
+		$return = null;
 
-			foreach ($lines as $line) {
-				if (preg_match('/[(\s\s)\t]+@(.*)(;)?/', $string, $matches)) {
-					return "Route::{$matches[1]};\n";
-				}
+		foreach ($lines as $line) {
+			if (preg_match('/^[(\s\s)\t]+@(.*)(;)?/', $string, $matches)) {
+				$return .= "Route::{$matches[1]};\n";
 			}
 		}
+
+		return $return;
 	}
 }
